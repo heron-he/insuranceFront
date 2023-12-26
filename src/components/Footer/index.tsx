@@ -5,12 +5,12 @@ import cs from 'classnames';
 import styles from './style/index.module.less';
 
 function Footer(props: FooterProps = {}) {
-  const { className, ...restProps } = props;
-  return (
-    <Layout.Footer className={cs(styles.footer, className)} {...restProps}>
-      Arco Design Pro
-    </Layout.Footer>
-  );
+    const { className, ...restProps } = props;
+    return (
+        <Layout.Footer className={cs(styles.footer, className)} {...restProps}>
+            Arco Design Pro
+        </Layout.Footer>
+    );
 }
 
 export default Footer;

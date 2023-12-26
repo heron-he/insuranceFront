@@ -20,79 +20,79 @@ import './mock';
 const store = createStore(rootReducer);
 
 function Index() {
-  const [lang, setLang] = useStorage('arco-lang', 'en-US');
-  const [theme, setTheme] = useStorage('arco-theme', 'light');
+    const [lang, setLang] = useStorage('arco-lang', 'en-US');
+    const [theme, setTheme] = useStorage('arco-theme', 'light');
 
-  function getArcoLocale() {
-    switch (lang) {
-      case 'zh-CN':
-        return zhCN;
-      case 'en-US':
-        return enUS;
-      default:
-        return zhCN;
+    function getArcoLocale() {
+        switch (lang) {
+            case 'zh-CN':
+                return zhCN;
+            case 'en-US':
+                return enUS;
+            default:
+                return zhCN;
+        }
     }
-  }
 
-  function fetchUserInfo() {
-    store.dispatch({
-      type: 'update-userInfo',
-      payload: { userLoading: true },
-    });
-    axios.get('/api/user/userInfo').then((res) => {
-      store.dispatch({
-        type: 'update-userInfo',
-        payload: { userInfo: res.data, userLoading: false },
-      });
-    });
-  }
-
-  useEffect(() => {
-    if (checkLogin()) {
-      fetchUserInfo();
-    } else if (window.location.pathname.replace(/\//g, '') !== 'login') {
-      window.location.pathname = '/login';
+    function fetchUserInfo() {
+        store.dispatch({
+            type: 'update-userInfo',
+            payload: { userLoading: true }
+        });
+        axios.get('/api/user/userInfo').then((res) => {
+            store.dispatch({
+                type: 'update-userInfo',
+                payload: { userInfo: res.data, userLoading: false }
+            });
+        });
     }
-  }, []);
 
-  useEffect(() => {
-    changeTheme(theme);
-  }, [theme]);
+    useEffect(() => {
+        if (checkLogin()) {
+            fetchUserInfo();
+        } else if (window.location.pathname.replace(/\//g, '') !== 'login') {
+            window.location.pathname = '/login';
+        }
+    }, []);
 
-  const contextValue = {
-    lang,
-    setLang,
-    theme,
-    setTheme,
-  };
+    useEffect(() => {
+        changeTheme(theme);
+    }, [theme]);
 
-  return (
-    <BrowserRouter>
-      <ConfigProvider
-        locale={getArcoLocale()}
-        componentConfig={{
-          Card: {
-            bordered: false,
-          },
-          List: {
-            bordered: false,
-          },
-          Table: {
-            border: false,
-          },
-        }}
-      >
-        <Provider store={store}>
-          <GlobalContext.Provider value={contextValue}>
-            <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="/" component={PageLayout} />
-            </Switch>
-          </GlobalContext.Provider>
-        </Provider>
-      </ConfigProvider>
-    </BrowserRouter>
-  );
+    const contextValue = {
+        lang,
+        setLang,
+        theme,
+        setTheme
+    };
+
+    return (
+        <BrowserRouter>
+            <ConfigProvider
+                locale={getArcoLocale()}
+                componentConfig={{
+                    Card: {
+                        bordered: false
+                    },
+                    List: {
+                        bordered: false
+                    },
+                    Table: {
+                        border: false
+                    }
+                }}
+            >
+                <Provider store={store}>
+                    <GlobalContext.Provider value={contextValue}>
+                        <Switch>
+                            <Route path='/login' component={Login} />
+                            <Route path='/' component={PageLayout} />
+                        </Switch>
+                    </GlobalContext.Provider>
+                </Provider>
+            </ConfigProvider>
+        </BrowserRouter>
+    );
 }
 
 ReactDOM.render(<Index />, document.getElementById('root'));

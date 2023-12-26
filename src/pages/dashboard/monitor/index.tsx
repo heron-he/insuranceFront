@@ -11,27 +11,27 @@ import styles from './style/index.module.less';
 import './mock';
 
 export default function Monitor() {
-  const userInfo = useSelector((state: any) => state.userInfo);
-  return (
-    <div>
-      <div className={styles.layout}>
-        <div className={styles['layout-left-side']}>
-          <ChatPanel />
+    const userInfo = useSelector((state: any) => state.userInfo);
+    return (
+        <div>
+            <div className={styles.layout}>
+                <div className={styles['layout-left-side']}>
+                    <ChatPanel />
+                </div>
+                <div className={styles['layout-content']}>
+                    <Space size={16} direction='vertical' style={{ width: '100%' }}>
+                        <Studio userInfo={userInfo} />
+                        <DataStatistic />
+                    </Space>
+                </div>
+                <div className={styles['layout-right-side']}>
+                    <Space size={16} direction='vertical' style={{ width: '100%' }}>
+                        <StudioStatus />
+                        <QuickOperation />
+                        <StudioInformation />
+                    </Space>
+                </div>
+            </div>
         </div>
-        <div className={styles['layout-content']}>
-          <Space size={16} direction="vertical" style={{ width: '100%' }}>
-            <Studio userInfo={userInfo} />
-            <DataStatistic />
-          </Space>
-        </div>
-        <div className={styles['layout-right-side']}>
-          <Space size={16} direction="vertical" style={{ width: '100%' }}>
-            <StudioStatus />
-            <QuickOperation />
-            <StudioInformation />
-          </Space>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

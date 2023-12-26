@@ -5,7 +5,7 @@ import './user';
 import './message-box';
 
 if (!isSSR) {
-  Mock.setup({
-    timeout: '500-1500',
-  });
+    Mock.setup({
+        timeout: '500-1500'
+    });
 }
