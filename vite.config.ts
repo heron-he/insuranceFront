@@ -6,26 +6,26 @@ import setting from './src/settings.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: [{ find: '@', replacement: '/src' }],
-  },
-  plugins: [
-    react(),
-    svgrPlugin({
-      svgrOptions: {},
-    }),
-    vitePluginForArco({
-      theme: '@arco-themes/react-arco-pro',
-      modifyVars: {
-        'arcoblue-6': setting.themeColor,
-      },
-    }),
-  ],
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-      },
+    resolve: {
+        alias: [{ find: '@', replacement: '/src' }],
     },
-  },
+    plugins: [
+        react(),
+        svgrPlugin({
+            svgrOptions: {},
+        }),
+        vitePluginForArco({
+            theme: '@arco-themes/react-arco-pro',
+            modifyVars: {
+                'arcoblue-6': setting.themeColor,
+            },
+        }),
+    ],
+    css: {
+        preprocessorOptions: {
+            less: {
+                javascriptEnabled: true,
+            },
+        },
+    },
 });
