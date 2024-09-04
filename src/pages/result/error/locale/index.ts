@@ -3,16 +3,13 @@ const i18n = {
         'menu.result': 'Result',
         'menu.result.error': 'Error',
         'error.result.title': 'Submit Error',
-        'error.result.subTitle':
-            'Please check the modified information and try again',
+        'error.result.subTitle': 'Please check the modified information and try again',
         'error.result.goBack': 'GoBack',
         'error.result.retry': 'Retry',
         'error.detailTitle': 'Details of Error',
-        'error.detailLine.record':
-            'The current domain name has not been registered, please check the registration process: ',
+        'error.detailLine.record': 'The current domain name has not been registered, please check the registration process: ',
         'error.detailLine.record.link': 'Registration Process',
-        'error.detailLine.auth':
-            'Your user group does not have the authority to perform this operation;',
+        'error.detailLine.auth': 'Your user group does not have the authority to perform this operation;',
         'error.detailLine.auth.link': 'Request for access',
     },
     'zh-CN': {
@@ -28,6 +25,6 @@ const i18n = {
         'error.detailLine.auth': '你的用户组不具有进行此操作的权限；',
         'error.detailLine.auth.link': '申请权限',
     },
-};
+}
 
-export default i18n;
+export default i18n

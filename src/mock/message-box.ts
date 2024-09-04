@@ -1,7 +1,7 @@
-import Mock from 'mockjs';
-import setupMock from '@/utils/setupMock';
+import Mock from 'mockjs'
+import setupMock from '@/utils/setupMock'
 
-const haveReadIds = [];
+const haveReadIds = []
 const getMessageList = () => {
     return [
         {
@@ -9,8 +9,7 @@ const getMessageList = () => {
             type: 'message',
             title: '郑曦月',
             subTitle: '的私信',
-            avatar:
-                '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp',
+            avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp',
             content: '审批请求已发送，请查收',
             time: '今天 12:30:01',
         },
@@ -19,10 +18,8 @@ const getMessageList = () => {
             type: 'message',
             title: '宁波',
             subTitle: '的回复',
-            avatar:
-                '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
-            content:
-                '此处 bug 已经修复，如有问题请查阅文档或者继续 github 提 issue～',
+            avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+            content: '此处 bug 已经修复，如有问题请查阅文档或者继续 github 提 issue～',
             time: '今天 12:30:01',
         },
         {
@@ -30,8 +27,7 @@ const getMessageList = () => {
             type: 'message',
             title: '宁波',
             subTitle: '的回复',
-            avatar:
-                '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+            avatar: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
             content: '此处 bug 已经修复',
             time: '今天 12:20:01',
         },
@@ -81,19 +77,19 @@ const getMessageList = () => {
     ].map((item) => ({
         ...item,
         status: haveReadIds.indexOf(item.id) === -1 ? 0 : 1,
-    }));
-};
+    }))
+}
 
 setupMock({
     setup: () => {
         Mock.mock(new RegExp('/api/message/list'), () => {
-            return getMessageList();
-        });
+            return getMessageList()
+        })
 
         Mock.mock(new RegExp('/api/message/read'), (params) => {
-            const { ids } = JSON.parse(params.body);
-            haveReadIds.push(...(ids || []));
-            return true;
-        });
+            const { ids } = JSON.parse(params.body)
+            haveReadIds.push(...(ids || []))
+            return true
+        })
     },
-});
+})

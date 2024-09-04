@@ -11,6 +11,6 @@ const i18n = {
         'exception.result.500.description': '抱歉，服务器出了点问题～',
         'exception.result.500.back': '返回',
     },
-};
+}
 
-export default i18n;
+export default i18n

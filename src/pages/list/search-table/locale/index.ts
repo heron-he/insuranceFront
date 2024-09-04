@@ -47,6 +47,6 @@ const i18n = {
         'searchForm.name.placeholder': '请输入集合名称',
         'searchForm.all.placeholder': '全部',
     },
-};
+}
 
-export default i18n;
+export default i18n

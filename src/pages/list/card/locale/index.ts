@@ -61,6 +61,6 @@ const i18n = {
         'cardList.tag.opened': '已开通',
         'cardList.tag.expired': '已过期',
     },
-};
+}
 
-export default i18n;
+export default i18n

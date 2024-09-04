@@ -21,6 +21,6 @@ const i18n = {
         'userInfo.btn.all': '查看全部',
         'userInfo.notice.empty': '暂无数据',
     },
-};
+}
 
-export default i18n;
+export default i18n

@@ -1,5 +1,5 @@
-import Mock from 'mockjs';
-import setupMock from '@/utils/setupMock';
+import Mock from 'mockjs'
+import setupMock from '@/utils/setupMock'
 
 setupMock({
     setup: () => {
@@ -14,8 +14,8 @@ setupMock({
                         'isCollect|2': true,
                     },
                 ],
-            });
-            return data.data;
-        });
+            })
+            return data.data
+        })
     },
-});
+})

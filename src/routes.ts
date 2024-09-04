@@ -1,15 +1,15 @@
-import auth, { AuthParams } from '@/utils/authentication';
-import { useEffect, useMemo, useState } from 'react';
+import auth, { AuthParams } from '@/utils/authentication'
+import { useEffect, useMemo, useState } from 'react'
 
 export type IRoute = AuthParams & {
-    name: string;
-    key: string;
+    name: string
+    key: string
     // 当前页是否展示面包屑
-    breadcrumb?: boolean;
-    children?: IRoute[];
+    breadcrumb?: boolean
+    children?: IRoute[]
     // 当前路由是否渲染菜单项，为 true 的话不会在菜单中显示，但可通过路由地址访问。
-    ignore?: boolean;
-};
+    ignore?: boolean
+}
 
 export const routes: IRoute[] = [
     {
@@ -23,9 +23,7 @@ export const routes: IRoute[] = [
             {
                 name: 'menu.dashboard.monitor',
                 key: 'dashboard/monitor',
-                requiredPermissions: [
-                    { resource: 'menu.dashboard.monitor', actions: ['write'] },
-                ],
+                requiredPermissions: [{ resource: 'menu.dashboard.monitor', actions: ['write'] }],
             },
         ],
     },
@@ -36,9 +34,7 @@ export const routes: IRoute[] = [
             {
                 name: 'menu.visualization.dataAnalysis',
                 key: 'visualization/data-analysis',
-                requiredPermissions: [
-                    { resource: 'menu.visualization.dataAnalysis', actions: ['read'] },
-                ],
+                requiredPermissions: [{ resource: 'menu.visualization.dataAnalysis', actions: ['read'] }],
             },
             {
                 name: 'menu.visualization.multiDimensionDataAnalysis',
@@ -78,16 +74,12 @@ export const routes: IRoute[] = [
             {
                 name: 'menu.form.group',
                 key: 'form/group',
-                requiredPermissions: [
-                    { resource: 'menu.form.group', actions: ['read', 'write'] },
-                ],
+                requiredPermissions: [{ resource: 'menu.form.group', actions: ['read', 'write'] }],
             },
             {
                 name: 'menu.form.step',
                 key: 'form/step',
-                requiredPermissions: [
-                    { resource: 'menu.form.step', actions: ['read'] },
-                ],
+                requiredPermissions: [{ resource: 'menu.form.step', actions: ['read'] }],
             },
         ],
     },
@@ -150,78 +142,78 @@ export const routes: IRoute[] = [
             },
         ],
     },
-];
+]
 
 export const getName = (path: string, routes) => {
     return routes.find((item) => {
-        const itemPath = `/${item.key}`;
+        const itemPath = `/${item.key}`
         if (path === itemPath) {
-            return item.name;
+            return item.name
         } else if (item.children) {
-            return getName(path, item.children);
+            return getName(path, item.children)
         }
-    });
-};
+    })
+}
 
 export const generatePermission = (role: string) => {
-    const actions = role === 'admin' ? ['*'] : ['read'];
-    const result = {};
+    const actions = role === 'admin' ? ['*'] : ['read']
+    const result = {}
     routes.forEach((item) => {
         if (item.children) {
             item.children.forEach((child) => {
-                result[child.name] = actions;
-            });
+                result[child.name] = actions
+            })
         }
-    });
-    return result;
-};
+    })
+    return result
+}
 
 const useRoute = (userPermission): [IRoute[], string] => {
     const filterRoute = (routes: IRoute[], arr = []): IRoute[] => {
         if (!routes.length) {
-            return [];
+            return []
         }
         for (const route of routes) {
-            const { requiredPermissions, oneOfPerm } = route;
-            let visible = true;
+            const { requiredPermissions, oneOfPerm } = route
+            let visible = true
             if (requiredPermissions) {
-                visible = auth({ requiredPermissions, oneOfPerm }, userPermission);
+                visible = auth({ requiredPermissions, oneOfPerm }, userPermission)
             }
 
             if (!visible) {
-                continue;
+                continue
             }
             if (route.children && route.children.length) {
-                const newRoute = { ...route, children: [] };
-                filterRoute(route.children, newRoute.children);
+                const newRoute = { ...route, children: [] }
+                filterRoute(route.children, newRoute.children)
                 if (newRoute.children.length) {
-                    arr.push(newRoute);
+                    arr.push(newRoute)
                 }
             } else {
-                arr.push({ ...route });
+                arr.push({ ...route })
             }
         }
 
-        return arr;
-    };
+        return arr
+    }
 
-    const [permissionRoute, setPermissionRoute] = useState(routes);
+    const [permissionRoute, setPermissionRoute] = useState(routes)
 
     useEffect(() => {
-        const newRoutes = filterRoute(routes);
-        setPermissionRoute(newRoutes);
-    }, [JSON.stringify(userPermission)]);
+        const newRoutes = filterRoute(routes)
+        setPermissionRoute(newRoutes)
+    }, [JSON.stringify(userPermission)])
 
     const defaultRoute = useMemo(() => {
-        const first = permissionRoute[0];
+        const first = permissionRoute[0]
         if (first) {
-            const firstRoute = first?.children?.[0]?.key || first.key;
-            return firstRoute;
+            const firstRoute = first?.children?.[0]?.key || first.key
+            return firstRoute
         }
-        return '';
-    }, [permissionRoute]);
+        return ''
+    }, [permissionRoute])
 
-    return [permissionRoute, defaultRoute];
-};
+    return [permissionRoute, defaultRoute]
+}
 
-export default useRoute;
+export default useRoute

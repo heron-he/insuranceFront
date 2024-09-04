@@ -73,6 +73,6 @@ const i18n = {
         'workplace.react': 'React 组件库',
         'workplace.vue': 'Vue 组件库',
     },
-};
+}
 
-export default i18n;
+export default i18n

@@ -94,6 +94,6 @@ const i18n = {
         'monitor.studioPreview.studio': '直播间',
         'monitor.studioPreview.watching': '在看',
     },
-};
+}
 
-export default i18n;
+export default i18n

@@ -13,6 +13,6 @@ const i18n = {
         'exception.result.404.retry': '重试',
         'exception.result.404.back': '返回',
     },
-};
+}
 
-export default i18n;
+export default i18n
